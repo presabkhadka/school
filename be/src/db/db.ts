@@ -11,8 +11,18 @@ const adminSchema = new mongoose.Schema({
   userContact: String,
 });
 
+const staffSchema = new mongoose.Schema({
+  userName: String,
+  userEmail: String,
+  userDesignation: String,
+  userExperience: String,
+  staffImage: String,
+});
+
 export const Admin = mongoose.model("Admin", adminSchema);
+export const Staff = mongoose.model("Staff", staffSchema);
 
 module.exports = {
   Admin,
+  Staff,
 };
