@@ -1,6 +1,7 @@
 import { type Request, type Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { Admin } from "../db/db";
+import "../types/type"
 
 export default async function AdminMiddleware(
   req: Request,
