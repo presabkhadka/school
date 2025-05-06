@@ -9,7 +9,6 @@ import {
 } from "../validation/adminValidation";
 import path from "path";
 import fs from "fs";
-import { reduceEachTrailingCommentRange } from "typescript";
 
 dotenv.config();
 let JWT_SECRET = process.env.JWT_SECRET as string;
@@ -67,10 +66,12 @@ export async function adminSignup(req: Request, res: Response) {
       return;
     }
 
+    let hashedPassword =await bcrypt.hash(userPassword as string, 10);
+
     await Admin.create({
       userName,
       userEmail,
-      userPassword,
+      userPassword: hashedPassword,
       userContact,
     });
 
