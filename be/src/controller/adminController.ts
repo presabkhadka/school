@@ -2,7 +2,7 @@ import { type Request, type Response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import { Admin, Staff } from "../db/db";
+import { Admin, Notice, Staff } from "../db/db";
 import {
   adminValidation,
   staffValidation,
@@ -66,7 +66,7 @@ export async function adminSignup(req: Request, res: Response) {
       return;
     }
 
-    let hashedPassword =await bcrypt.hash(userPassword as string, 10);
+    let hashedPassword = await bcrypt.hash(userPassword as string, 10);
 
     await Admin.create({
       userName,
@@ -208,6 +208,30 @@ export async function editStaff(req: Request, res: Response) {
   } catch (error) {
     if (error instanceof Error) {
       msg: error.message;
+    }
+  }
+}
+
+export async function addNotice(req: Request, res: Response) {
+  try {
+    let notice = req.file ? `/uploads/${req.file.filename}` : null;
+    if (!notice) {
+      res.status(404).json({
+        msg: "No file selected for adding notice",
+      });
+      return;
+    }
+    await Notice.create({
+      notice,
+    });
+    res.status(200).json({
+      msg: "Notice added successfully",
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      res.status(500).json({
+        msg: error.message,
+      });
     }
   }
 }
