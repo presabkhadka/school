@@ -271,3 +271,53 @@ export async function deleteNotice(req: Request, res: Response) {
     }
   }
 }
+
+export async function totalStaff(req: Request, res: Response) {
+  try {
+    let staff = await Staff.find({});
+
+    if (!staff) {
+      res.status(404).json({
+        msg: "No staff found in db",
+      });
+      return;
+    }
+
+    let totalStaff = staff.length;
+
+    res.status(200).json({
+      totalStaff,
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      res.status(500).json({
+        msg: error.message,
+      });
+    }
+  }
+}
+
+export async function totalNotice(req: Request, res: Response) {
+  try {
+    let notice = await Notice.find({});
+
+    if (!notice) {
+      res.status(404).json({
+        msg: "No notice found in db",
+      });
+      return;
+    }
+
+    let totalNotice = notice.length;
+
+    res.status(200).json({
+      totalNotice,
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      res.status(500).json({
+        msg: error.message,
+      });
+    }
+  }
+}

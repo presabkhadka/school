@@ -8,6 +8,8 @@ import {
   deleteNotice,
   deleteStaff,
   editStaff,
+  totalNotice,
+  totalStaff,
 } from "../controller/adminController";
 import multer from "multer";
 import path from "path";
@@ -61,5 +63,7 @@ adminRouter.post(
   addNotice
 );
 adminRouter.delete("/delete-notice/:noticeId", AdminMiddleware, deleteNotice);
+adminRouter.get("/total-staff", AdminMiddleware, totalStaff)
+adminRouter.get("/total-notice", AdminMiddleware, totalNotice)
 
 export { adminRouter };
