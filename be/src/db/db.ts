@@ -19,10 +19,16 @@ const staffSchema = new mongoose.Schema({
   staffImage: String,
 });
 
+const noticeSchema = new mongoose.Schema({
+  notice: String,
+});
+
 export const Admin = mongoose.model("Admin", adminSchema);
 export const Staff = mongoose.model("Staff", staffSchema);
+export const Notice = mongoose.model("Notice", noticeSchema);
 
 module.exports = {
   Admin,
   Staff,
+  Notice,
 };
