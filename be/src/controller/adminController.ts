@@ -235,3 +235,39 @@ export async function addNotice(req: Request, res: Response) {
     }
   }
 }
+
+export async function deleteNotice(req: Request, res: Response) {
+  try {
+    let noticeId = req.params.noticeId;
+    if (!noticeId) {
+      res.status(404).json({
+        msg: "No notice id found in params",
+      });
+      return;
+    }
+
+    let noticeExist = await Notice.findOne({
+      _id: noticeId,
+    });
+
+    if (!noticeExist) {
+      res.status(404).json({
+        msg: "No notice found with such id in db",
+      });
+      return;
+    }
+
+    await Notice.deleteOne({
+      _id: noticeId,
+    });
+    res.status(200).json({
+      msg: "Notice deleted successfully",
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      res.status(500).json({
+        msg: error.message,
+      });
+    }
+  }
+}
