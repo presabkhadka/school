@@ -1,6 +1,7 @@
 import { Router, type Request, type Response } from "express";
 import AdminMiddleware from "../middleware/adminMiddleware";
 import {
+  addNotice,
   addStaff,
   adminLogin,
   adminSignup,
@@ -26,10 +27,13 @@ const storage = multer.diskStorage({
 const upload = multer({
   storage,
   fileFilter: function (req, file, cb) {
-    if (file.mimetype.startsWith("image/")) {
+    if (
+      file.mimetype.startsWith("image/") ||
+      file.mimetype === "application/pdf"
+    ) {
       cb(null, true);
     } else {
-      cb(new Error("Only image files are allowed!"));
+      cb(new Error("Only image files and pdf files are allowed!"));
     }
   },
   limits: {
@@ -49,5 +53,11 @@ adminRouter.post(
 );
 adminRouter.delete("/delete-staff/:staffId", AdminMiddleware, deleteStaff);
 adminRouter.patch("/update-staff/:staffId", AdminMiddleware, editStaff);
+adminRouter.post(
+  "/add-notice",
+  AdminMiddleware,
+  upload.single("notice"),
+  addNotice
+);
 
 export { adminRouter };
