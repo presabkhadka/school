@@ -67,7 +67,12 @@ adminRouter.post(
 adminRouter.delete("/delete-notice/:noticeId", AdminMiddleware, deleteNotice);
 adminRouter.get("/total-staff", AdminMiddleware, totalStaff);
 adminRouter.get("/total-notice", AdminMiddleware, totalNotice);
-adminRouter.post("/add-photo", AdminMiddleware, addGallery);
+adminRouter.post(
+  "/add-photo",
+  AdminMiddleware,
+  upload.single("photo"),
+  addGallery
+);
 adminRouter.delete("/delete-photo/:galleryId", AdminMiddleware, deleteGallery);
 
 export { adminRouter };
