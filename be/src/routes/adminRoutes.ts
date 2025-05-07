@@ -5,6 +5,7 @@ import {
   addStaff,
   adminLogin,
   adminSignup,
+  deleteNotice,
   deleteStaff,
   editStaff,
 } from "../controller/adminController";
@@ -59,5 +60,6 @@ adminRouter.post(
   upload.single("notice"),
   addNotice
 );
+adminRouter.delete("/delete-notice/:noticeId", AdminMiddleware, deleteNotice);
 
 export { adminRouter };
