@@ -2,7 +2,7 @@ import { type Request, type Response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import { Admin, Notice, Staff } from "../db/db";
+import { Admin, Gallery, Notice, Staff } from "../db/db";
 import {
   adminValidation,
   staffValidation,
@@ -312,6 +312,71 @@ export async function totalNotice(req: Request, res: Response) {
 
     res.status(200).json({
       totalNotice,
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      res.status(500).json({
+        msg: error.message,
+      });
+    }
+  }
+}
+
+export async function addGallery(req: Request, res: Response) {
+  try {
+    let photo = req.file ? `uploads/${req.file.filename}` : null;
+
+    if (!photo) {
+      res.status(404).json({
+        msg: "Please select a photo to add in gallery",
+      });
+      return;
+    }
+
+    await Gallery.create({
+      photo,
+    });
+
+    res.status(200).json({
+      msg: "Photo added successfully in gallery",
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      res.status(500).json({
+        msg: error.message,
+      });
+    }
+  }
+}
+
+export async function deleteGallery(req: Request, res: Response) {
+  try {
+    let galleryId = req.params.galleryId;
+
+    if (!galleryId) {
+      res.status(404).json({
+        msg: "No gallery id in params",
+      });
+      return;
+    }
+
+    let galleryExists = await Gallery.findOne({
+      _id: galleryId,
+    });
+
+    if (!galleryExists) {
+      res.status(404).json({
+        msg: "No such photo found in gallery in db",
+      });
+      return;
+    }
+
+    await Gallery.deleteOne({
+      _id: galleryId,
+    });
+
+    res.status(200).json({
+      msg: "Photo deleted successfully from the gallery",
     });
   } catch (error) {
     if (error instanceof Error) {

@@ -30,11 +30,11 @@ const gallerySchema = new mongoose.Schema({
 export const Admin = mongoose.model("Admin", adminSchema);
 export const Staff = mongoose.model("Staff", staffSchema);
 export const Notice = mongoose.model("Notice", noticeSchema);
-export const Photo = mongoose.model("Photo", gallerySchema);
+export const Gallery = mongoose.model("Gallery", gallerySchema);
 
 module.exports = {
   Admin,
   Staff,
   Notice,
-  Photo,
+  Gallery,
 };
