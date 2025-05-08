@@ -1,3 +1,4 @@
+import Footer from "@/components/footer";
 import SchoolNavbar from "@/components/SchoolNavbar";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -64,6 +65,7 @@ export default function Gallery() {
             </div>
           )}
         </div>
+        <Footer/>
       </div>
       {selectedPhoto && (
         <div
