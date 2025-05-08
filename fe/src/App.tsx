@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import AboutUs from "./pages/view/school/AboutUs";
 import { Toaster } from "react-hot-toast";
 import Gallery from "./pages/view/school/Gallery";
+import Contact from "./pages/view/school/Contact";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           { path: "/", element: <Landing /> },
           { path: "/about", element: <AboutUs /> },
           { path: "/gallery", element: <Gallery /> },
+          { path: "/contact-us", element: <Contact /> },
         ])}
       ></RouterProvider>
       <Toaster position="bottom-right" />
