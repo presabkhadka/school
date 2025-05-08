@@ -3,6 +3,7 @@ import Landing from "./pages/view/school/Landing";
 import { ThemeProvider } from "@/components/theme-provider";
 import AboutUs from "./pages/view/school/AboutUs";
 import { Toaster } from "react-hot-toast";
+import Gallery from "./pages/view/school/Gallery";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         router={createBrowserRouter([
           { path: "/", element: <Landing /> },
           { path: "/about", element: <AboutUs /> },
+          { path: "/gallery", element: <Gallery /> },
         ])}
       ></RouterProvider>
       <Toaster position="bottom-right" />
