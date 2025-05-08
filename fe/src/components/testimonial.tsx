@@ -30,7 +30,7 @@ export default function Testimonial() {
   return (
     <div className="w-full flex flex-col items-center gap-4 p-4">
       <h1 className="text-4xl font-bold text-green-500">What teacher says</h1>
-      <p className="w-[60vw] text-lg">
+      <p className="md:w-[60vw] text-lg">
         <span className="text-6xl">"</span>
         {testimonials[currentIdx].message}
         <span className="text-6xl line-clamp-1 text-end">"</span>
