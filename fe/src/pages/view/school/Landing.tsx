@@ -1,3 +1,4 @@
+import Footer from "@/components/footer";
 import ImageSlider from "@/components/image-slider";
 import SchoolNavbar from "@/components/SchoolNavbar";
 import Testimonial from "@/components/testimonial";
@@ -60,12 +61,7 @@ export default function Landing() {
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
           </div>
-          <div className="h-[10vh] flex justify-center items-center bg-black text-white border-t-2 dark:bg-muted">
-            <p>
-              Shree Balmandir Secondary School - © Copyright 2024. All Rights
-              Reserved.
-            </p>
-          </div>
+          <Footer/>
         </div>
       </div>
     </div>
