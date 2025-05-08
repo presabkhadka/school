@@ -5,7 +5,7 @@ import Testimonial from "@/components/testimonial";
 
 export default function Landing() {
   return (
-    <div className="grid grid-cols-1 h-screen md:grid md:grid-cols-12">
+    <div className="grid grid-cols-1 h-screen md:grid md:grid-cols-12 overflow-x-hidden">
       <div className="col-span-full">
         <div className="top-0 sticky z-50 bg-white shadow-lg overflow-hidden dark:bg-black">
           <SchoolNavbar />
@@ -16,7 +16,7 @@ export default function Landing() {
         <div className="col-span-full">
           <div className=" p-10 flex flex-col items-center gap-2 dark:bg-muted">
             <h1 className="text-blue-500 font-bold text-4xl">Our School</h1>
-            <p className="w-[60vw] text-lg text-justify">
+            <p className="h-64 overflow-y-scroll md:h-fit md:overflow-hidden md:w-[60vw] md:text-lg md:text-justify">
               Welcome to Shree Balmandir Secondary School, a distinguished
               government institution dedicated to providing quality education in
               both English and Nepali mediums. Our commitment extends from
