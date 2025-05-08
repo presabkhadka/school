@@ -7,7 +7,7 @@ export default function Landing() {
   return (
     <div className="grid grid-cols-1 h-screen md:grid md:grid-cols-12">
       <div className="col-span-full">
-        <div className="top-0 sticky z-50 bg-white shadow-lg overflow-hidden dark:bg-muted">
+        <div className="top-0 sticky z-50 bg-white shadow-lg overflow-hidden dark:bg-black">
           <SchoolNavbar />
         </div>
         <div className="col-span-full overflow-hidden">

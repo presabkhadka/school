@@ -39,7 +39,7 @@ export default function Gallery() {
   return (
     <div className="h-screen w-screen overflow-x-hidden dark:bg-muted grid grid-cols-1 md:grid md:grid-cols-12">
       <div className="col-span-full">
-        <div className="top-0 sticky z-50 bg-white shadow-lg dark:bg-muted">
+        <div className="top-0 sticky z-50 bg-white shadow-lg dark:bg-black">
           <SchoolNavbar />
         </div>
         <div className="max-w-6xl mx-auto p-6">

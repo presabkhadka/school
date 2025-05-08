@@ -35,7 +35,7 @@ export default function AboutUs() {
   return (
     <div className="h-screen w-screen grid grid-cols-1 md:grid md:grid-cols-12 gap-4 dark:bg-muted overflow-x-hidden">
       <div className="col-span-full">
-        <div className="top-0 sticky z-50 bg-white shadow-lg dark:bg-muted">
+        <div className="top-0 sticky z-50 bg-white shadow-lg dark:bg-black">
           <SchoolNavbar />
         </div>
         <div className="px-6 py-10 flex justify-center gap-8">
