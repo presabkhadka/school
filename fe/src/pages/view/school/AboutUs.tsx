@@ -35,18 +35,18 @@ export default function AboutUs() {
   return (
     <div className="h-screen w-screen grid grid-cols-1 md:grid md:grid-cols-12 gap-4 dark:bg-muted overflow-x-hidden">
       <div className="col-span-full">
-        <div className="top-0 sticky z-50 bg-white shadow-lg dark:bg-black">
+        <div className="top-0 sticky z-50 bg-white shadow-lg dark:bg-black overflow-hidden">
           <SchoolNavbar />
         </div>
-        <div className="px-6 py-10 flex justify-center gap-8">
-          <div className="h-96 w-[30%]">
+        <div className="px-6 py-10 md:flex justify-center gap-8">
+          <div className="h-96 mb-4 md:w-[30%]">
             <img
               src="principal.jpeg"
               alt="princpal"
               className="h-96 w-full rounded-lg"
             />
           </div>
-          <div className="flex flex-col w-1/3 gap-4">
+          <div className="flex flex-col md:w-1/3 gap-4">
             <p className="text-2xl font-bold underline">
               A message from the principal
             </p>
@@ -67,7 +67,7 @@ export default function AboutUs() {
           </div>
         </div>
         <div className="flex justify-center px-8 py-10 gap-4 bg-muted dark:border">
-          <div className="grid grid-cols-1 md:grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid lg:grid-cols-3 gap-8">
             <div className="border-2 p-4 rounded-lg bg-white shadow-lg dark:bg-muted hover:border-blue-500 flex flex-col gap-2 hover:scale-105 transition-all duration-200">
               <h2 className="font-bold text-3xl text-blue-500">Our Mission</h2>
               <p className="text-lg text-justify">
@@ -98,7 +98,7 @@ export default function AboutUs() {
         </div>
         <div className="px-8 py-10 gap-8 flex flex-col justify-center items-center">
           <h1 className="text-4xl font-bold text-blue-500">Our Staff</h1>
-          <div className="grid grid-cols-1 md:grid md:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 md:grid md:grid-cols-2 lg:grid-cols-3 gap-10">
             {staff.map((stf, index) => (
               <div
                 className="border-2 col-span-1 rounded-lg hover:border-blue-500 hover:scale-105 transition-all duration-200 shadow-lg"
