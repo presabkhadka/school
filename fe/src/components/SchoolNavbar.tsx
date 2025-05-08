@@ -24,7 +24,7 @@ export default function SchoolNavbar() {
           Home
         </NavLink>
         <NavLink
-          to={"/about-us"}
+          to={"/about"}
           className={({ isActive }) =>
             `flex p-2 items-center gap-4 hover:outline-none cursor-pointer ${
               isActive
