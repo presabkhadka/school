@@ -5,6 +5,9 @@ import AboutUs from "./pages/view/school/AboutUs";
 import { Toaster } from "react-hot-toast";
 import Gallery from "./pages/view/school/Gallery";
 import Contact from "./pages/view/school/Contact";
+import Login from "./pages/auth/Login";
+import AdminAuthGuard from "./guards/AdminAuthGuard";
+import AdminDashboard from "./pages/view/admin/AdminDashboard";
 
 function App() {
   return (
@@ -15,6 +18,14 @@ function App() {
           { path: "/about", element: <AboutUs /> },
           { path: "/gallery", element: <Gallery /> },
           { path: "/contact-us", element: <Contact /> },
+          { path: "/admin/login", element: <Login /> },
+          {
+            path: "/admin",
+            element: <AdminAuthGuard />,
+            children: [
+              { path: "/admin/dashboard", element: <AdminDashboard /> },
+            ],
+          },
         ])}
       ></RouterProvider>
       <Toaster position="bottom-right" />
