@@ -4,16 +4,15 @@ import { LogIn, Menu, X } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { useState } from "react";
 
-export default function SchoolNavbar() {
+export default function AdminNavbar() {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navItems = [
-    { to: "/", label: "Home" },
-    { to: "/about", label: "About Us" },
-    { to: "/gallery", label: "Gallery" },
-    { to: "/notice", label: "Notice" },
-    { to: "/contact-us", label: "Contact Us" },
+    { to: "/admin/dashboard", label: "Dashboard" },
+    { to: "/admin/staffs", label: "Staffs" },
+    { to: "/admin/gallery", label: "Gallery" },
+    { to: "/admin/notice", label: "Notice" },
   ];
 
   return (
@@ -30,7 +29,7 @@ export default function SchoolNavbar() {
               key={item.to}
               to={item.to}
               className={({ isActive }) =>
-                `flex p-2 items-center gap-2 cursor-pointer font-semibold text-xl transition-colors duration-200` +
+                `flex p-2 items-center gap-2 cursor-pointer font-semibold text-xl transition-colors duration-200 ` +
                 (isActive
                   ? "text-green-500 hover:text-green-300"
                   : "text-gray-600 hover:text-black dark:text-slate-50 dark:hover:text-slate-500")
