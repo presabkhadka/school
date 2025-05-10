@@ -12,6 +12,7 @@ export default function SchoolNavbar() {
     { to: "/", label: "Home" },
     { to: "/about", label: "About Us" },
     { to: "/gallery", label: "Gallery" },
+    { to: "/notice", label: "Notice" },
     { to: "/contact-us", label: "Contact Us" },
   ];
 
