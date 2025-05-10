@@ -9,6 +9,7 @@ import Login from "./pages/auth/Login";
 import AdminAuthGuard from "./guards/AdminAuthGuard";
 import AdminDashboard from "./pages/view/admin/AdminDashboard";
 import Notice from "./pages/view/school/Notice";
+import Staff from "./pages/view/admin/Staff";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             element: <AdminAuthGuard />,
             children: [
               { path: "/admin/dashboard", element: <AdminDashboard /> },
+              { path: "/admin/staffs", element: <Staff /> },
             ],
           },
         ])}
