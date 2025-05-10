@@ -1,12 +1,22 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { ModeToggle } from "./mode-toggle";
-import { LogIn, Menu, X } from "lucide-react";
+import { LogIn, Menu, User, X } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { useState } from "react";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 export default function AdminNavbar() {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
+
+  let handleLogout = () => {
+    localStorage.removeItem("Authorization");
+    navigate("/admin/login");
+  };
 
   const navItems = [
     { to: "/admin/dashboard", label: "Dashboard" },
@@ -43,11 +53,23 @@ export default function AdminNavbar() {
         {/* Action Buttons */}
         <div className="hidden md:flex items-center gap-4">
           <ModeToggle />
-          <Avatar className="hover:cursor-pointer">
-            <AvatarFallback>
-              <LogIn onClick={() => navigate("/admin/login")} />
-            </AvatarFallback>
-          </Avatar>
+          <Popover>
+            <PopoverTrigger>
+              <Avatar className="hover:cursor-pointer">
+                <AvatarFallback>
+                  <User />
+                </AvatarFallback>
+              </Avatar>
+            </PopoverTrigger>
+            <PopoverContent>
+              <button
+                className="border px-4 py-2 rounded-lg bg-red-500 text-white cursor-pointer w-full"
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
+            </PopoverContent>
+          </Popover>
         </div>
 
         {/* Mobile Menu Button */}
@@ -87,7 +109,7 @@ export default function AdminNavbar() {
                 }}
                 className="mt-2 flex items-center gap-2 font-semibold text-gray-700 hover:text-gray-900 dark:text-gray-200 dark:hover:text-white"
               >
-                <LogIn /> Admin Login
+                <LogIn />
               </button>
             </div>
           </div>
