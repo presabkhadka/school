@@ -386,3 +386,24 @@ export async function deleteGallery(req: Request, res: Response) {
     }
   }
 }
+
+export async function getStaff(req: Request, res: Response) {
+  try {
+    let staff = await Staff.find({});
+    if (!staff) {
+      res.status(404).json({
+        msg: "No staff found in our db",
+      });
+      return;
+    }
+    res.status(200).json({
+      staff,
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      res.status(500).json({
+        msg: error.message,
+      });
+    }
+  }
+}
