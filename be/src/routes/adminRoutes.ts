@@ -10,6 +10,7 @@ import {
   deleteNotice,
   deleteStaff,
   editStaff,
+  getStaff,
   totalNotice,
   totalStaff,
 } from "../controller/adminController";
@@ -74,5 +75,6 @@ adminRouter.post(
   addGallery
 );
 adminRouter.delete("/delete-photo/:galleryId", AdminMiddleware, deleteGallery);
+adminRouter.get("/staff", AdminMiddleware, getStaff);
 
 export { adminRouter };
