@@ -8,6 +8,7 @@ import Contact from "./pages/view/school/Contact";
 import Login from "./pages/auth/Login";
 import AdminAuthGuard from "./guards/AdminAuthGuard";
 import AdminDashboard from "./pages/view/admin/AdminDashboard";
+import Notice from "./pages/view/school/Notice";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           { path: "/", element: <Landing /> },
           { path: "/about", element: <AboutUs /> },
           { path: "/gallery", element: <Gallery /> },
+          { path: "/notice", element: <Notice /> },
           { path: "/contact-us", element: <Contact /> },
           { path: "/admin/login", element: <Login /> },
           {
