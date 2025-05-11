@@ -438,3 +438,24 @@ export async function getGallery(req: Request, res: Response) {
     }
   }
 }
+
+export async function getNotice(req: Request, res: Response) {
+  try {
+    let notice = await Notice.find({});
+    if (!notice) {
+      res.status(404).json({
+        msg: "No notice found in our db",
+      });
+      return;
+    }
+    res.status(200).json({
+      notice,
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      res.status(500).json({
+        msg: error.message,
+      });
+    }
+  }
+}
