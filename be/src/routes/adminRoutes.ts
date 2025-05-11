@@ -83,7 +83,7 @@ adminRouter.post(
 );
 adminRouter.delete("/delete-photo/:galleryId", AdminMiddleware, deleteGallery);
 adminRouter.get("/staff", AdminMiddleware, getStaff);
-adminRouter.get("/gallery", AdminMiddleware, getGallery)
-adminRouter.get("/notice", AdminMiddleware, getNotice)
+adminRouter.get("/gallery", AdminMiddleware, getGallery);
+adminRouter.get("/notice", AdminMiddleware, getNotice);
 
 export { adminRouter };

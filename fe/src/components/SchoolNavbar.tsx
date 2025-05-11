@@ -30,7 +30,7 @@ export default function SchoolNavbar() {
               key={item.to}
               to={item.to}
               className={({ isActive }) =>
-                `flex p-2 items-center gap-2 cursor-pointer font-semibold text-xl transition-colors duration-200` +
+                `flex p-2 items-center gap-2 cursor-pointer font-semibold text-xl transition-colors duration-200 ` +
                 (isActive
                   ? "text-green-500 hover:text-green-300"
                   : "text-gray-600 hover:text-black dark:text-slate-50 dark:hover:text-slate-500")
