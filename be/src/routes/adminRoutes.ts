@@ -58,7 +58,12 @@ adminRouter.post(
   addStaff
 );
 adminRouter.delete("/delete-staff/:staffId", AdminMiddleware, deleteStaff);
-adminRouter.patch("/update-staff/:staffId", AdminMiddleware, editStaff);
+adminRouter.patch(
+  "/update-staff/:staffId",
+  AdminMiddleware,
+  upload.single("staffImage"),
+  editStaff
+);
 adminRouter.post(
   "/add-notice",
   AdminMiddleware,
