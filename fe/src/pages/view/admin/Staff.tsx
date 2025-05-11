@@ -141,7 +141,7 @@ export default function Staff() {
   };
 
   return (
-    <div className="h-screen w-screen grid grid-cols-1 md:grid-cols-12 dark:bg-muted overflow-y-scroll">
+    <div className="h-screen w-screen grid grid-cols-1 md:grid-cols-12 dark:bg-muted overflow-x-hidden">
       <div className="col-span-full">
         <div className="top-0 sticky z-50">
           <AdminNavbar />
