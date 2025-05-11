@@ -136,7 +136,7 @@ export default function AdminGallery() {
                   <img
                     src={`http://localhost:4646/${gal.photo}`}
                     alt="staff image"
-                    className="aspect-video rounded-l-lg "
+                    className="aspect-video rounded-t-lg "
                   />
                 </div>
                 <div className="flex justify-center items-center p-4">
