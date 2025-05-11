@@ -415,3 +415,26 @@ export async function getStaff(req: Request, res: Response) {
     }
   }
 }
+
+export async function getGallery(req: Request, res: Response) {
+  try {
+    let gallery = await Gallery.find({});
+
+    if (!gallery) {
+      res.status(404).json({
+        msg: "No gallery foundin our db",
+      });
+      return;
+    }
+
+    res.status(200).json({
+      gallery,
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      res.status(500).json({
+        msg: error.message,
+      });
+    }
+  }
+}
