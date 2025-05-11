@@ -12,8 +12,8 @@ export default function AdminDashboard() {
     let fetchStaff = async () => {
       try {
         let token = localStorage.getItem("Authorization")?.split(" ")[1];
-        if(!token){
-            throw new Error("No token found in headers")
+        if (!token) {
+          throw new Error("No token found in headers");
         }
         let response = await axios.get(
           "http://localhost:4646/admin/total-staff",
@@ -30,35 +30,37 @@ export default function AdminDashboard() {
         }
       }
     };
-    fetchStaff()
-    let interval = setInterval(fetchStaff, 10000)
-    return ()=> clearInterval(interval)
+    fetchStaff();
+    let interval = setInterval(fetchStaff, 10000);
+    return () => clearInterval(interval);
   }, [totalStaff]);
 
-
-  useEffect(()=>{
-let fetchNotice = async ()=>{
-    try {
-        let token = localStorage.getItem("Authorization")?.split(" ")[1]
-        if(!token){
-            throw new Error("No token found in headers")
+  useEffect(() => {
+    let fetchNotice = async () => {
+      try {
+        let token = localStorage.getItem("Authorization")?.split(" ")[1];
+        if (!token) {
+          throw new Error("No token found in headers");
         }
-        let response = await axios.get("http://localhost:4646/admin/total-notice", {
-            headers:{
-                Authorization: `Bearer ${token}`
-            }
-        })
-        setTotalNotice(response.data.totalNotice)
-    } catch (error) {
-        if (error instanceof Error){
-            toast.error(error.message)
+        let response = await axios.get(
+          "http://localhost:4646/admin/total-notice",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setTotalNotice(response.data.totalNotice);
+      } catch (error) {
+        if (error instanceof Error) {
+          toast.error(error.message);
         }
-    }
-}
-fetchNotice()
-let interval = setInterval(fetchNotice, 10000)
-return ()=> clearInterval(interval)
-  }, [totalNotice])
+      }
+    };
+    fetchNotice();
+    let interval = setInterval(fetchNotice, 10000);
+    return () => clearInterval(interval);
+  }, [totalNotice]);
 
   return (
     <div className="grid grid-cols-1 h-screen md:grid-cols-12 dark:bg-muted">
