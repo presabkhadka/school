@@ -177,7 +177,13 @@ export async function editStaff(req: Request, res: Response) {
       return;
     }
 
-    const { userName, userEmail, userDesignation, userExperience } = req.body;
+    const {
+      userName = undefined,
+      userEmail = undefined,
+      userDesignation = undefined,
+      userExperience = undefined,
+    } = req.body as Record<string, any>;
+
     const staffImage = req.file ? `/uploads/${req.file.filename}` : null;
 
     const fieldsToUpdate: Record<string, any> = {};
@@ -185,11 +191,11 @@ export async function editStaff(req: Request, res: Response) {
     if (userName) fieldsToUpdate.userName = userName;
     if (userEmail) fieldsToUpdate.userEmail = userEmail;
     if (userDesignation) fieldsToUpdate.userDesignation = userDesignation;
-    if (userExperience) fieldsToUpdate.userExperience = userExperience;
+    if (userExperience) fieldsToUpdate.userExperience = Number(userExperience);
     if (staffImage) fieldsToUpdate.staffImage = staffImage;
 
     if (Object.keys(fieldsToUpdate).length === 0) {
-      res.status(200).json({
+      res.status(400).json({
         msg: "No fields to update",
       });
       return;
@@ -207,7 +213,9 @@ export async function editStaff(req: Request, res: Response) {
     });
   } catch (error) {
     if (error instanceof Error) {
-      msg: error.message;
+      res.status(500).json({
+        msg: error.message,
+      });
     }
   }
 }
