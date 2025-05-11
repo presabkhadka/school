@@ -11,6 +11,7 @@ import AdminDashboard from "./pages/view/admin/AdminDashboard";
 import Notice from "./pages/view/school/Notice";
 import Staff from "./pages/view/admin/Staff";
 import AdminGallery from "./pages/view/admin/AdminGallery";
+import AdminNotice from "./pages/view/AdminNotice";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
               { path: "/admin/dashboard", element: <AdminDashboard /> },
               { path: "/admin/staffs", element: <Staff /> },
               { path: "/admin/gallery", element: <AdminGallery /> },
+              { path: "/admin/notice", element: <AdminNotice /> },
             ],
           },
         ])}
