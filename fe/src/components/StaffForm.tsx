@@ -1,26 +1,24 @@
 import React, { useState } from "react";
 import { Input } from "./ui/input";
-import axios from "axios";
-import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
-export default function StaffForm() {
-  let [userName, setUserName] = useState("");
-  let [userEmail, setUserEmail] = useState("");
-  let [userDesignation, setUserDesignation] = useState("");
-  let [userExperience, setUserExperience] = useState("");
+interface StaffFormProps {
+  staff: any;
+  onSubmit: (formData: FormData) => Promise<void>;
+}
+
+export default function StaffForm({ staff, onSubmit }: StaffFormProps) {
+  let [userName, setUserName] = useState(staff?.userName || "");
+  let [userEmail, setUserEmail] = useState(staff?.userEmail || "");
+  let [userDesignation, setUserDesignation] = useState(
+    staff?.userDesignation || ""
+  );
+  let [userExperience, setUserExperience] = useState(
+    staff?.userExperience || ""
+  );
   let [staffImage, setStaffImage] = useState<File | null>(null);
 
   const navigate = useNavigate();
-
-  const formData = new FormData();
-  formData.append("userName", userName);
-  formData.append("userEmail", userEmail);
-  formData.append("userDesignation", userDesignation);
-  formData.append("userExperience", userExperience);
-  if (staffImage) {
-    formData.append("staffImage", staffImage);
-  }
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -31,28 +29,16 @@ export default function StaffForm() {
   let handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    let token = localStorage.getItem("Authorization")?.split(" ")[1];
-
-    if (!token) {
-      throw new Error("No authorization token in headers");
+    const formData = new FormData();
+    formData.append("userName", userName);
+    formData.append("userEmail", userEmail);
+    formData.append("userDesignation", userDesignation);
+    formData.append("userExperience", userExperience);
+    if (staffImage) {
+      formData.append("staffImage", staffImage);
     }
 
-    let response = await axios.post(
-      "http://localhost:4646/admin/add-staff",
-      formData,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-
-    if (response.status === 200) {
-      toast.success("Staff added successfully");
-      navigate("/admin/dashboard");
-    } else {
-      toast.error("Something went wrong while creating the staff");
-    }
+    await onSubmit(formData);
   };
 
   return (
@@ -109,7 +95,7 @@ export default function StaffForm() {
         <div className="flex justify-center">
           <button
             className="w-full border px-4 py-2 rounded-lg bg-blue-500 text-white cursor-pointer hover:scale-105 hover:bg-blue-400"
-            onSubmit={handleSubmit}
+            type="submit"
           >
             Submit
           </button>
