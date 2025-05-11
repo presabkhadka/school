@@ -12,6 +12,7 @@ import StaffForm from "@/components/StaffForm";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Staff() {
   interface Staff {
@@ -23,8 +24,72 @@ export default function Staff() {
     staffImage: string;
   }
 
+  const navigate = useNavigate();
+
   let [staffs, setStaffs] = useState<Staff[]>([]);
   let [isSelected, setIsSelected] = useState<Staff | null>(null);
+  let [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+
+  let handleCreateStaff = async (formData: FormData) => {
+    let token = localStorage.getItem("Authorization")?.split(" ")[1];
+
+    if (!token) {
+      throw new Error("No authorization token in headers");
+    }
+
+    let response = await axios.post(
+      "http://localhost:4646/admin/add-staff",
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (response.status === 200) {
+      setIsDialogOpen(false);
+      toast.success("Staff added successfully");
+      navigate("/admin/dashboard");
+    } else {
+      toast.error("Something went wrong while creating the staff");
+    }
+  };
+
+  let handleUpdateStaff = async (formData: FormData) => {
+    try {
+      let token = localStorage.getItem("Authorization")?.split(" ")[1];
+      if (!token) {
+        throw new Error("No token in headers");
+      }
+
+      if (!formData.get("staffImage")) {
+        formData.delete("staffImage");
+      }
+
+      console.log("Client is sending:");
+      for (let [k, v] of formData.entries()) {
+        console.log(`  ${k}:`, v);
+      }
+
+      let response = await axios.patch(
+        `http://localhost:4646/admin/update-staff/${isSelected?._id}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setIsDialogOpen(false);
+      toast.success("Staff updated successfully");
+      navigate("/admin/dashboard")
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+      }
+    }
+  };
 
   useEffect(() => {
     let fetchStaff = async () => {
@@ -50,7 +115,7 @@ export default function Staff() {
     fetchStaff();
     let interval = setInterval(fetchStaff, 10000);
     return () => clearInterval(interval);
-  }, [staffs]);
+  }, []);
 
   let handleDelete = async (isSelected: any) => {
     try {
@@ -67,6 +132,7 @@ export default function Staff() {
         }
       );
       toast.success("Staff deleted successfully");
+      navigate("/admin/dashboard");
     } catch (error) {
       if (error instanceof Error) {
         toast.error(error.message);
@@ -88,24 +154,34 @@ export default function Staff() {
                 Staffs
               </p>
             </div>
-            <Dialog>
-              <DialogTrigger className="border px-4 py-2 rounded-lg bg-blue-500 text-white cursor-pointer hover:scale-105 hover:bg-blue-400">
+            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+              <DialogTrigger
+                className="border px-4 py-2 rounded-lg bg-blue-500 text-white cursor-pointer hover:scale-105 hover:bg-blue-400"
+                onClick={() => {
+                  setIsSelected(null);
+                  setIsDialogOpen(true);
+                }}
+              >
                 Add Staff
               </DialogTrigger>
               <DialogContent>
                 <DialogHeader>
-                  <DialogTitle>Are you absolutely sure?</DialogTitle>
                   <DialogDescription>
-                    <StaffForm />
+                    <StaffForm
+                      staff={isSelected}
+                      onSubmit={
+                        isSelected ? handleUpdateStaff : handleCreateStaff
+                      }
+                    />
                   </DialogDescription>
                 </DialogHeader>
               </DialogContent>
             </Dialog>
           </div>
           <div className="w-full flex flex-col gap-4">
-            {staffs.map((staff, index) => (
+            {staffs.map((staff) => (
               <div
-                key={index}
+                key={staff._id}
                 className="border-2 rounded-lg hover:border-blue-500 flex flex-col sm:flex-row gap-4 shadow-lg"
               >
                 <div className="w-full md:w-1/3">
@@ -139,7 +215,13 @@ export default function Staff() {
                     </p>
                   </div>
                   <div className="self-end flex gap-2">
-                    <button className="px-4 py-2  bg-green-500 rounded-lg text-white hover:scale-105 cursor-pointer hover:bg-green-400">
+                    <button
+                      className="px-4 py-2  bg-green-500 rounded-lg text-white hover:scale-105 cursor-pointer hover:bg-green-400"
+                      onClick={() => {
+                        setIsSelected(staff);
+                        setIsDialogOpen(true);
+                      }}
+                    >
                       Edit
                     </button>
                     <button
