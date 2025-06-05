@@ -19,7 +19,6 @@ export default function AdminGallery() {
   }
 
   let [gallery, setGallery] = useState<Gallery[]>([]);
-  let [isSelected, setIsSelected] = useState<Gallery | null>(null);
   let [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
 
   useEffect(() => {
@@ -54,7 +53,7 @@ export default function AdminGallery() {
         throw new Error("No token in headers");
       }
 
-      let response = await axios.delete(
+      await axios.delete(
         `http://localhost:4646/admin/delete-photo/${isSelected?._id}`,
         {
           headers: {
@@ -76,7 +75,7 @@ export default function AdminGallery() {
       if (!token) {
         throw new Error("No token in headers");
       }
-      let response = await axios.post(
+      await axios.post(
         "http://localhost:4646/admin/add-photo",
         formData,
         {

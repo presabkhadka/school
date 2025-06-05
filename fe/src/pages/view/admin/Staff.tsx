@@ -5,7 +5,6 @@ import {
   DialogContent,
   DialogDescription,
   DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import StaffForm from "@/components/StaffForm";
@@ -72,7 +71,7 @@ export default function Staff() {
         console.log(`  ${k}:`, v);
       }
 
-      let response = await axios.patch(
+      await axios.patch(
         `http://localhost:4646/admin/update-staff/${isSelected?._id}`,
         formData,
         {
@@ -83,7 +82,7 @@ export default function Staff() {
       );
       setIsDialogOpen(false);
       toast.success("Staff updated successfully");
-      navigate("/admin/dashboard")
+      navigate("/admin/dashboard");
     } catch (error) {
       if (error instanceof Error) {
         toast.error(error.message);
@@ -123,7 +122,7 @@ export default function Staff() {
       if (!token) {
         throw new Error("No token in headers");
       }
-      let response = await axios.delete(
+      await axios.delete(
         `http://localhost:4646/admin/delete-staff/${isSelected._id}`,
         {
           headers: {

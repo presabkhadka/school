@@ -27,15 +27,11 @@ export default function AdminNotice() {
       if (!token) {
         throw new Error("No token in headers");
       }
-      let response = await axios.post(
-        "http://localhost:4646/admin/add-notice",
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      await axios.post("http://localhost:4646/admin/add-notice", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       toast.success("Notice added successfully");
       setIsDialogOpen(false);
     } catch (error) {
@@ -51,7 +47,7 @@ export default function AdminNotice() {
       if (!token) {
         throw new Error("No token in headers");
       }
-      let response = await axios.delete(
+      await axios.delete(
         `http://localhost:4646/admin/delete-notice/${notice._id}`,
         {
           headers: {

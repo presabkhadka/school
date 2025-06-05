@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Input } from "./ui/input";
-import { useNavigate } from "react-router-dom";
 
 interface StaffFormProps {
   staff: any;
@@ -17,8 +16,6 @@ export default function StaffForm({ staff, onSubmit }: StaffFormProps) {
     staff?.userExperience || ""
   );
   let [staffImage, setStaffImage] = useState<File | null>(null);
-
-  const navigate = useNavigate();
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
